@@ -59,11 +59,15 @@ def resize():
     # extract url
     url = request.args['url']
     url = str(url)
+    
+    target = request.args['target']
+    target = str(target)
+    
     size = request.args['size']
     size = size.split('*')
     length = int(size[0])
     width = int (size[1])
-     
+    
 
     # extract image name
     n = url.split('/')
@@ -80,6 +84,6 @@ def resize():
     # resize func: (lenght,hight)
     imgResize = cv2.resize(img,(length,width))
 
-    cv2.imwrite("/home/ehsaniran/public_html/pics/"+name+"-resized.jpeg",imgResize)
+    cv2.imwrite("/home/ehsaniran/public_html/"+target+"/"+name+"-resized.jpeg",imgResize)
 
     return "done"

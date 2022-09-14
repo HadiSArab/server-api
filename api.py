@@ -87,3 +87,43 @@ def resize():
     cv2.imwrite("/home/ehsaniran/public_html/"+target+"/"+name+"-resized.jpeg",imgResize)
 
     return "done"
+
+
+@app.route('/imrotate')
+def rotate():
+    
+    # image address url
+    url = request.args['url']
+    url = str(url)
+
+    # extract image name from url
+    n = url.split("/")
+    na = str(n[-1])
+    nam = na.split('.')
+    name = str(nam[0])
+
+    # desired store location
+    target = request.args['target']
+    target = str(target)
+
+    # angle should be according to right-turn
+    angle = request.args['angle'] 
+    angle = int(angle)
+
+    # load image
+    response =  requests.get(url).content
+    # convert to array of ints
+    nparr = np.frombuffer(response, np.uint8)
+    # convert to image array
+    img = cv2.imdecode(nparr,cv2.IMREAD_UNCHANGED)
+    
+    # rotation
+    width, length, rgb= img.shape
+
+    matrix = cv2.getRotationMatrix2D((length/2,width/2),angle,1)    
+    new_img = cv2.warpAffine(img,matrix,(length,width))
+    
+    # store new image in target directory
+    cv2.imwrite("/home/ehsaniran/public_html/"+target+"/"+name+"-rot"+str(angle)+".jpg",new_img)
+    
+    return "done"

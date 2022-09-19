@@ -124,6 +124,6 @@ def rotate():
     new_img = cv2.warpAffine(img,matrix,(length,width))
     
     # store new image in target directory
-    cv2.imwrite("/home/ehsaniran/public_html/"+target+"/"+name+"-rot"+str(angle)+".jpg",new_img)
+    cv2.imwrite("/home/mehrehsan/public_html/"+target+"/"+name+"-rot"+str(angle)+".jpg",new_img)
     
     return "done"

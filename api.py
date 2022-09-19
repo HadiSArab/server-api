@@ -84,6 +84,6 @@ def resize():
     # resize func: (lenght,hight)
     imgResize = cv2.resize(img,(length,width))
 
-    cv2.imwrite("/home/ehsaniran/public_html/"+target+"/"+name+"-resized.jpeg",imgResize)
+    cv2.imwrite("/home/mehrehsan/public_html/"+target+"/"+name+"-resized.jpeg",imgResize)
 
     return "done"
